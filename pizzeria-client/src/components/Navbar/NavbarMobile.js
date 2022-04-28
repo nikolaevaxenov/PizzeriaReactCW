@@ -17,8 +17,16 @@ import RegistrationModal from "../AuthModal/RegistrationModal";
 
 function NavbarMobile() {
   const [navBarMobVisibility, setNavBarMobVisibility] = useState("none");
-  const { isOpenLog, onOpenLog, onCloseLog } = useDisclosure();
-  const { isOpenReg, onOpenReg, onCloseReg } = useDisclosure();
+  const {
+    isOpen: isOpenLog,
+    onOpen: onOpenLog,
+    onClose: onCloseLog,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenReg,
+    onOpen: onOpenReg,
+    onClose: onCloseReg,
+  } = useDisclosure();
 
   return (
     <React.Fragment>
@@ -118,15 +126,11 @@ function NavbarMobile() {
           </Button>
         </ButtonGroup>
       </Flex>
-      <LoginModal
-        isOpenLog={isOpenLog}
-        onCloseLog={onCloseLog}
-        onOpenReg={onOpenReg}
-      />
+      <LoginModal isOpen={isOpenLog} onClose={onCloseLog} onOpen={onOpenReg} />
       <RegistrationModal
-        isOpenReg={isOpenReg}
-        onCloseReg={onCloseReg}
-        onOpenLog={onOpenLog}
+        isOpen={isOpenReg}
+        onClose={onCloseReg}
+        onOpen={onOpenLog}
       />
     </React.Fragment>
   );

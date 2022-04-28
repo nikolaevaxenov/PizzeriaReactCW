@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
+  Alert,
+  AlertIcon,
   Button,
   Modal,
   ModalOverlay,
@@ -14,9 +16,23 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
+import { emailValidation } from "../../utils/formValidation";
 
 function LoginModal(props) {
-  const initialRef = React.useRef();
+  const initialRef = useRef();
+
+  const [email, setEmail] = useState("");
+
+  const [emailError, setEmailError] = useState(true);
+
+  const formValidationHandler = (event) => {
+    event.preventDefault();
+    if (emailValidation(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
 
   return (
     <>
@@ -27,41 +43,54 @@ function LoginModal(props) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Вход</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input ref={initialRef} placeholder="Email" />
-            </FormControl>
+          <form action="" onSubmit={formValidationHandler}>
+            <ModalHeader>Вход</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  ref={initialRef}
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              {!emailError && (
+                <Alert status="error" mt={2}>
+                  <AlertIcon />
+                  Неверный email
+                </Alert>
+              )}
 
-            <FormControl mt={4}>
-              <FormLabel>Пароль</FormLabel>
-              <Input type="password" placeholder="Пароль" />
-            </FormControl>
-          </ModalBody>
-          <Center>
-            <Text color="blackAlpha.700">
-              Нет аккаунта?
-              <Button
-                pl={2}
-                color="black"
-                variant="link"
-                onClick={() => {
-                  props.onClose();
-                  props.onOpen();
-                }}
-              >
-                Зарегистрируйтесь
+              <FormControl mt={4}>
+                <FormLabel>Пароль</FormLabel>
+                <Input type="password" placeholder="Пароль" />
+              </FormControl>
+            </ModalBody>
+            <Center>
+              <Text color="blackAlpha.700">
+                Нет аккаунта?
+                <Button
+                  pl={2}
+                  color="black"
+                  variant="link"
+                  onClick={() => {
+                    props.onClose();
+                    props.onOpen();
+                  }}
+                >
+                  Зарегистрируйтесь
+                </Button>
+              </Text>
+            </Center>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} type="submit">
+                Войти
               </Button>
-            </Text>
-          </Center>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Войти
-            </Button>
-            <Button onClick={props.onClose}>Закрыть</Button>
-          </ModalFooter>
+              <Button onClick={props.onClose}>Закрыть</Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>
