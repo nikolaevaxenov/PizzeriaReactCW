@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, selectAuth } from "../../services/authSlice";
 import {
   Alert,
   AlertIcon,
@@ -15,15 +17,20 @@ import {
   ModalFooter,
   Text,
   Center,
+  useToast,
 } from "@chakra-ui/react";
 import {
   emailValidation,
   nameValidation,
   passwordValidation,
 } from "../../utils/formValidation";
+import { registerUser } from "../../api/userAPI";
 
 function RegistrationModal(props) {
   const initialRef = useRef();
+  const auth = useSelector(selectAuth);
+  const dispatch = useDispatch();
+  const toast = useToast();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -34,6 +41,7 @@ function RegistrationModal(props) {
   const [nameError, setNameError] = useState(true);
   const [pass1Error, setPass1Error] = useState(true);
   const [pass2Error, setPass2Error] = useState(true);
+  const [authError, setAuthError] = useState(true);
 
   const formValidationHandler = (event) => {
     event.preventDefault();
@@ -59,6 +67,27 @@ function RegistrationModal(props) {
     } else {
       setPass2Error(false);
     }
+
+    if (emailError && nameError && pass1Error && pass2Error && !auth) {
+      registerUser(email, pass2, name).then((res) => {
+        console.log(res.status);
+        if (res.status === 208) {
+          setAuthError(false);
+          return;
+        }
+
+        setAuthError(true);
+        dispatch(login());
+        props.onClose();
+        toast({
+          title: "Успех",
+          description: "Вы успешно зарегистрировались!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+    }
   };
 
   return (
@@ -81,6 +110,7 @@ function RegistrationModal(props) {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  isRequired={true}
                 />
               </FormControl>
               {!emailError && (
@@ -96,6 +126,7 @@ function RegistrationModal(props) {
                   placeholder="Имя"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  isRequired={true}
                 />
               </FormControl>
               {!nameError && (
@@ -112,6 +143,7 @@ function RegistrationModal(props) {
                   placeholder="Пароль"
                   value={pass1}
                   onChange={(e) => setPass1(e.target.value)}
+                  isRequired={true}
                 />
               </FormControl>
               {!pass1Error && (
@@ -129,12 +161,19 @@ function RegistrationModal(props) {
                   placeholder="Подтвердите пароль"
                   value={pass2}
                   onChange={(e) => setPass2(e.target.value)}
+                  isRequired={true}
                 />
               </FormControl>
               {!pass2Error && (
                 <Alert status="error" mt={2}>
                   <AlertIcon />
                   Пароли не совпадают.
+                </Alert>
+              )}
+              {!authError && (
+                <Alert status="error" mt={2}>
+                  <AlertIcon />
+                  Пользователь с такой электронной почтой уже существует!
                 </Alert>
               )}
             </ModalBody>

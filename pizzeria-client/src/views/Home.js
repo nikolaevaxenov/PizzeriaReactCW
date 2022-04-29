@@ -1,11 +1,25 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, selectAuth } from "../services/authSlice";
 import { SimpleGrid, Center } from "@chakra-ui/react";
 import Navbar from "../components/Navbar/Navbar";
 import PizzaCard from "../components/PizzaCard/PizzaCard";
 import { getAllPizzas } from "../api/pizzaAPI";
+import { refreshUser } from "../api/userAPI";
 
 function Home() {
   const [pizzas, setPizzas] = useState([]);
+  const auth = useSelector(selectAuth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    refreshUser().then((response) => {
+      if (response.status === 201) {
+        dispatch(login());
+        console.log(auth);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     getAllPizzas()
