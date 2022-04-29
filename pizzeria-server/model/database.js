@@ -18,6 +18,11 @@ const reCreateTables = async () => {
   console.log("All models were synchronized successfully.");
 };
 
+const getAllusers = async () => {
+  const result = await userModel.findAll();
+  console.log(JSON.stringify(result, null, 2));
+};
+
 const insertSampleValues = async () => {
   const user1 = await userModel.create({
     email: "testUser@tt.ru",
@@ -174,4 +179,5 @@ const insertSampleValues = async () => {
 };
 
 //reCreateTables();
+//getAllusers();
 insertSampleValues();
