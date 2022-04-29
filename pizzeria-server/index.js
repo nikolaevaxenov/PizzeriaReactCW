@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/user", require("./routes/user"));
-//app.use("/pizza", require("./routes/pizza"));
+app.use("/pizza", require("./routes/pizza"));
 //app.use("/order", require("./routes/order"));
 
 app.all("*", (req, res) => {
