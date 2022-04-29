@@ -8,7 +8,6 @@ const createNewPizza = async (req, res) => {
   try {
     const result = await pizzaModel.create({
       title: req.body.title,
-      description: req.body.description,
       ingredients: req.body.ingredients,
       photo: req.body.photo,
       price_26: req.body.price_26,
@@ -25,7 +24,6 @@ const updatePizza = async (req, res) => {
   const result = await pizzaModel.update(
     {
       title: req.body.title,
-      description: req.body.description,
       ingredients: req.body.ingredients,
       photo: req.body.photo,
       price_26: req.body.price_26,

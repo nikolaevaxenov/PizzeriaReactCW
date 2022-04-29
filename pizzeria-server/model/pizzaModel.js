@@ -21,10 +21,6 @@ const Pizza = sequelize.define("Pizza", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
   ingredients: {
     type: DataTypes.TEXT,
     allowNull: false,
