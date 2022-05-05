@@ -19,21 +19,27 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import RadioSizeButton from "./RadioSizeButton";
 import AmountInput from "./AmountInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PizzaCard(props) {
   const [price, setPrice] = useState(props.price_26);
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("26 см");
 
   const options = ["26 см", "30 см", "40 см"];
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "pizzaSizes",
     defaultValue: "26 см",
     onChange: (size) => {
-      setPrice(props[`price_${size.substring(0, 2)}`]);
+      setSize(size);
     },
   });
 
   const group = getRootProps();
+
+  useEffect(() => {
+    setPrice(props[`price_${size.substring(0, 2)}`] * quantity);
+  }, [quantity, size]);
   return (
     <Box
       maxW="sm"
@@ -88,7 +94,7 @@ function PizzaCard(props) {
         </HStack>
       </Center>
       <Center mt={2}>
-        <AmountInput />
+        <AmountInput setQuantity={setQuantity} />
         <Heading ml={2} size="md">
           {price} ₽
         </Heading>

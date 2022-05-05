@@ -1,6 +1,7 @@
 import { useNumberInput, HStack, Button, Input } from "@chakra-ui/react";
+import { useEffect } from "react";
 
-function AmountInput() {
+function AmountInput(props) {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -12,6 +13,10 @@ function AmountInput() {
   const inc = getIncrementButtonProps();
   const dec = getDecrementButtonProps();
   const input = getInputProps();
+
+  useEffect(() => {
+    props.setQuantity(input.value);
+  }, [input.value]);
 
   return (
     <HStack maxW="320px">
