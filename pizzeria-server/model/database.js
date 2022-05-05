@@ -164,6 +164,7 @@ const insertSampleValues = async () => {
   });
 };
 
-//reCreateTables();
+reCreateTables().then(() => {
+  insertSampleValues();
+});
 //getAllusers();
-insertSampleValues();

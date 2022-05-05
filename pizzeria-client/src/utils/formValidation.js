@@ -12,3 +12,8 @@ export const passwordValidation = (pass) => {
   const passRegex = /(?=^.{8,33}$)(?=.*\d)(?![.\n])(?=.*[a-z]).*$/;
   return passRegex.test(pass);
 };
+
+export const phoneValidation = (phone) => {
+  const phoneRegex = /^7[0-9]{10}$/;
+  return phoneRegex.test(phone);
+};

@@ -30,8 +30,10 @@ const handleRefreshToken = (req, res) => {
               expiresIn: "5m",
             }
           );
-          console.log("Okay!");
-          return res.status(201).json({ accessToken });
+          return res.status(201).json({
+            userID: decoded.id,
+            accessToken: accessToken,
+          });
         }
       );
     })

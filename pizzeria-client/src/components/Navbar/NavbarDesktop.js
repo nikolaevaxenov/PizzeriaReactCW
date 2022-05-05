@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAuth } from "../../services/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Flex,
   Spacer,
@@ -21,6 +22,7 @@ import LogoutButton from "./LogoutButton";
 
 function NavbarDesktop() {
   const auth = useSelector(selectAuth);
+  let navigate = useNavigate();
 
   const {
     isOpen: isOpenLog,
@@ -49,7 +51,7 @@ function NavbarDesktop() {
             bgGradient="linear(to right, #f12711, #f5af19)"
             bgClip="text"
           >
-            Пиццерия
+            <Link to="/">Пиццерия</Link>
           </Heading>
         </Box>
         <Spacer />
@@ -90,6 +92,7 @@ function NavbarDesktop() {
                   bgGradient: "linear(to right, #659999, #f4791f)",
                 }}
                 icon={<FaUserAlt />}
+                onClick={() => navigate("/profile")}
               />
               <LogoutButton />
             </React.Fragment>
