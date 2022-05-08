@@ -71,6 +71,22 @@ const getCartOrderPrice = async (req, res) => {
   }
 };
 
+const getCartPizzas = async (req, res) => {
+  try {
+    const result = await orderPizzaModel.findAll({
+      include: {
+        model: pizzaModel,
+      },
+      where: {
+        OrderId: req.params.id,
+      },
+    });
+    return res.status(201).json(result);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 const getOrders = async (req, res) => {
   try {
     const result = await orderModel.findAll({
@@ -177,6 +193,7 @@ const removeFromCart = async (req, res) => {
       }
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: err.message });
   }
 };
@@ -186,6 +203,9 @@ const createOrder = async (req, res) => {
     const result = await orderModel.update(
       {
         status: "In Progress",
+        comment: req.body.comment,
+        AddressId: req.body.addressId,
+        CardDetailId: req.body.cardDetailId,
       },
       {
         where: {
@@ -208,6 +228,7 @@ module.exports = {
   getCartOrder,
   getCartOrderQuantity,
   getCartOrderPrice,
+  getCartPizzas,
   getOrders,
   addToCart,
   removeFromCart,

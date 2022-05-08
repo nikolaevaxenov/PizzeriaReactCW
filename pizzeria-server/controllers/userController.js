@@ -103,6 +103,29 @@ const updateUser = async (req, res) => {
     .json({ message: `User with id=${req.body.id} updated` });
 };
 
+const updateUserOnOrder = async (req, res) => {
+  const result = await userModel.update(
+    {
+      email: req.body.email,
+      phone_number: Number(req.body.phone_number),
+      first_name: req.body.first_name,
+    },
+    {
+      where: {
+        id: req.body.id,
+      },
+    }
+  );
+  if (result[0] === 0) {
+    return res
+      .status(400)
+      .json({ message: `User ID ${req.body.id} not found` });
+  }
+  return res
+    .status(201)
+    .json({ message: `User with id=${req.body.id} updated` });
+};
+
 const updatePasswordUser = async (req, res) => {
   const user = await userModel
     .findOne({
@@ -193,6 +216,7 @@ module.exports = {
   registerUser,
   loginUser,
   updateUser,
+  updateUserOnOrder,
   updatePasswordUser,
   deleteUser,
   getUser,

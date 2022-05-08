@@ -12,6 +12,8 @@ export const authSlice = createSlice({
     userEmail: "",
     orderCartID: 0,
     orderCartQuantity: false,
+    addressReload: false,
+    cardReload: false,
   },
   reducers: {
     userID: (state, payload) => {
@@ -38,6 +40,12 @@ export const authSlice = createSlice({
     orderCartQuantityReload: (state) => {
       state.orderCartQuantity = !state.orderCartQuantity;
     },
+    addressReload: (state) => {
+      state.addressReload = !state.addressReload;
+    },
+    cardReload: (state) => {
+      state.cardReload = !state.cardReload;
+    },
     login: (state) => {
       state.authState = true;
     },
@@ -58,6 +66,8 @@ export const {
   userEmail,
   orderCartID,
   orderCartQuantityReload,
+  addressReload,
+  cardReload,
 } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth.authState;
@@ -70,5 +80,7 @@ export const selectUserEmail = (state) => state.auth.userEmail;
 export const selectOrderCartID = (state) => state.auth.orderCartID;
 export const selectOrderCartQuantityReload = (state) =>
   state.auth.orderCartQuantity;
+export const selectAddressReload = (state) => state.auth.addressReload;
+export const selectCardReload = (state) => state.auth.cardReload;
 
 export default authSlice.reducer;

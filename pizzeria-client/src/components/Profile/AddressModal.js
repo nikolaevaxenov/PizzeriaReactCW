@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUserID } from "../../services/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addressReload, selectUserID } from "../../services/authSlice";
 import {
   Button,
   Modal,
@@ -34,6 +34,7 @@ import {
 
 function AddressModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
   const toast = useToast();
 
   const userID = useSelector(selectUserID);
@@ -217,6 +218,7 @@ function AddressModal() {
                                     intercomCode
                                   ).then((result) => {
                                     if (result.status === 201) {
+                                      dispatch(addressReload());
                                       toast({
                                         title: "Успех",
                                         description:
@@ -253,6 +255,7 @@ function AddressModal() {
                               ) {
                                 deleteAddress(address.id).then((result) => {
                                   if (result.status === 201) {
+                                    dispatch(addressReload());
                                     toast({
                                       title: "Успех",
                                       description: "Вы успешно удалили адрес!",
@@ -399,6 +402,7 @@ function AddressModal() {
                               intercomCode
                             ).then((result) => {
                               if (result.status === 201) {
+                                dispatch(addressReload());
                                 toast({
                                   title: "Успех",
                                   description: "Вы успешно добавили адрес!",

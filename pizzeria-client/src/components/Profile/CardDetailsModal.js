@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUserID } from "../../services/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { cardReload, selectUserID } from "../../services/authSlice";
 import {
   Button,
   Modal,
@@ -29,6 +29,7 @@ import { getCard, createCard, updateCard, deleteCard } from "../../api/cardAPI";
 
 function AddressModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
   const toast = useToast();
 
   const userID = useSelector(selectUserID);
@@ -153,6 +154,7 @@ function AddressModal() {
                                     cvcCode
                                   ).then((result) => {
                                     if (result.status === 201) {
+                                      dispatch(cardReload());
                                       toast({
                                         title: "Успех",
                                         description:
@@ -186,6 +188,7 @@ function AddressModal() {
                               ) {
                                 deleteCard(card.id).then((result) => {
                                   if (result.status === 201) {
+                                    dispatch(cardReload());
                                     toast({
                                       title: "Успех",
                                       description:
@@ -277,6 +280,7 @@ function AddressModal() {
                               cvcCode
                             ).then((result) => {
                               if (result.status === 201) {
+                                dispatch(cardReload());
                                 toast({
                                   title: "Успех",
                                   description:

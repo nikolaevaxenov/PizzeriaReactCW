@@ -69,6 +69,27 @@ export const updateUser = async (
   });
 };
 
+export const updateUserOnOrder = async (
+  userID,
+  firstName,
+  phoneNumber,
+  email
+) => {
+  return await fetch(`http://localhost:3001/user/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      id: userID.payload,
+      email: email,
+      phone_number: phoneNumber,
+      first_name: firstName,
+    }),
+  });
+};
+
 export const updatePasswordUser = async (userID, oldPassword, newPassword) => {
   return await fetch(`http://localhost:3001/user/password/`, {
     method: "PUT",

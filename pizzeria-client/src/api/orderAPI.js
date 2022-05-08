@@ -25,6 +25,15 @@ export const getCartOrderPrice = async (id) => {
   }
 };
 
+export const getCartPizzas = async (id) => {
+  if (id !== undefined) {
+    return await fetch(`http://localhost:3001/order/cartpizza/${id}`, {
+      method: "GET",
+      credentials: "include",
+    });
+  }
+};
+
 export const addToCart = async (id, pizzaId, size, quantity) => {
   if (id !== undefined) {
     return await fetch(`http://localhost:3001/order/cart/${id}`, {
@@ -50,7 +59,7 @@ export const removeFromCart = async (id, pizzaId, size, quantity) => {
     },
     credentials: "include",
     body: JSON.stringify({
-      PizzaId: Number(pizzaId),
+      pizzaId: Number(pizzaId),
       size: Number(size),
       quantity: Number(quantity),
     }),
@@ -66,12 +75,17 @@ export const getOrders = async (id) => {
   }
 };
 
-export const createOrder = async (id) => {
+export const createOrder = async (id, addressId, cardDetailId, comment) => {
   return await fetch(`http://localhost:3001/order/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
+    body: JSON.stringify({
+      comment: comment,
+      addressId: Number(addressId),
+      cardDetailId: Number(cardDetailId),
+    }),
   });
 };

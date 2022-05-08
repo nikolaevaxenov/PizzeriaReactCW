@@ -6,7 +6,8 @@ const validateToken = require("../middleware/jwtValidateToken");
 router
   .route("/")
   .get(usersController.getAllUsers)
-  .put(usersController.updateUser);
+  .put(usersController.updateUser)
+  .post(usersController.updateUserOnOrder);
 
 router.route("/registration").post(usersController.registerUser);
 

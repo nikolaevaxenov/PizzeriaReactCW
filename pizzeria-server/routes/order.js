@@ -4,6 +4,7 @@ const orderController = require("../controllers/orderController");
 
 router.route("/cartquantity/:id").get(orderController.getCartOrderQuantity);
 router.route("/cartprice/:id").get(orderController.getCartOrderPrice);
+router.route("/cartpizza/:id").get(orderController.getCartPizzas);
 
 router
   .route("/cart/:id")
