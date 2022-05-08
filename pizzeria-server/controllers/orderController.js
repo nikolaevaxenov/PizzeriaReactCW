@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const orderModel = require("../model/orderModel");
 const orderPizzaModel = require("../model/orderPizzaModel");
 const pizzaModel = require("../model/pizzaModel");
@@ -66,6 +67,44 @@ const getCartOrderPrice = async (req, res) => {
       totalPrice += pizza[0].Pizza.dataValues.price * pizza[0].quantity;
     }
     return res.status(201).json(totalPrice);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getOrderHistory = async (req, res) => {
+  try {
+    const orders = await orderModel.findAll({
+      attributes: ["id", "createdAt", "status"],
+      model: orderModel,
+      where: {
+        UserId: req.params.id,
+        status: {
+          [Op.ne]: "Cart",
+        },
+      },
+    });
+
+    let pizzaOrders = [];
+
+    for (const order of orders) {
+      pizzaOrders.push([
+        order,
+        await orderPizzaModel.findAll({
+          attributes: ["size", "quantity", "PizzaId"],
+          model: orderPizzaModel,
+          where: {
+            OrderId: order.id,
+          },
+          include: {
+            model: pizzaModel,
+            attributes: ["title", "price_26", "price_30", "price_40"],
+          },
+        }),
+      ]);
+    }
+
+    return res.status(201).json(pizzaOrders);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -228,6 +267,7 @@ module.exports = {
   getCartOrder,
   getCartOrderQuantity,
   getCartOrderPrice,
+  getOrderHistory,
   getCartPizzas,
   getOrders,
   addToCart,

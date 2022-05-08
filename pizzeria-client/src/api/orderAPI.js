@@ -25,6 +25,15 @@ export const getCartOrderPrice = async (id) => {
   }
 };
 
+export const getOrderHistory = async (id) => {
+  if (id !== undefined) {
+    return await fetch(`http://localhost:3001/order/carthistory/${id}`, {
+      method: "GET",
+      credentials: "include",
+    });
+  }
+};
+
 export const getCartPizzas = async (id) => {
   if (id !== undefined) {
     return await fetch(`http://localhost:3001/order/cartpizza/${id}`, {
