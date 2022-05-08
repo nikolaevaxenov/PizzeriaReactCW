@@ -19,6 +19,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import LoginModal from "../AuthModal/LoginModal";
 import RegistrationModal from "../AuthModal/RegistrationModal";
 import LogoutButton from "./LogoutButton";
+import CartButton from "./CartButton";
 
 function NavbarDesktop() {
   const auth = useSelector(selectAuth);
@@ -66,13 +67,7 @@ function NavbarDesktop() {
         </Box>
         <Spacer />
         <ButtonGroup gap="2">
-          <IconButton
-            bgGradient="linear(to right, #f12711, #f5af19)"
-            _hover={{
-              bgGradient: "linear(to right, #659999, #f4791f)",
-            }}
-            icon={<AiOutlineShoppingCart />}
-          />
+          <CartButton />
           {!auth ? (
             <Button
               bgGradient="linear(to right, #f12711, #f5af19)"

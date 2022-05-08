@@ -9,19 +9,26 @@ import {
   userMiddleName,
   userPhoneNumber,
   userEmail,
+  orderCartID,
+  orderCartQuantity,
   selectAuth,
+  selectUserID,
+  selectOrderCartID,
 } from "../services/authSlice";
 import { refreshUser, getUser } from "../api/userAPI";
+import { getCartOrder } from "../api/orderAPI";
 
 function useAuth(privateRoute = false, watchingState = null) {
   const dispatch = useDispatch();
   const authState = useSelector(selectAuth);
+  const userIDSelector = useSelector(selectUserID);
+  const orderCartIDSelector = useSelector(selectOrderCartID);
+
   let navigate = useNavigate();
 
   useEffect(() => {
     refreshUser()
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           dispatch(login());
           return res.json();
@@ -32,14 +39,12 @@ function useAuth(privateRoute = false, watchingState = null) {
       })
       .then((data) => {
         if (data) {
-          console.log(data);
           dispatch(userID(data.userID));
           getUser(data.userID)
             .then((res) => {
               return res.json();
             })
             .then((data) => {
-              console.log(data);
               dispatch(userFirstName(data[0].first_name));
               dispatch(userLastName(data[0].last_name));
               dispatch(userMiddleName(data[0].middle_name));
@@ -49,6 +54,19 @@ function useAuth(privateRoute = false, watchingState = null) {
         }
       });
   }, [authState, watchingState]);
+
+  useEffect(() => {
+    if (userIDSelector.payload !== undefined) {
+      getCartOrder(userIDSelector.payload)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          dispatch(orderCartID(data.id));
+        });
+    }
+  }, [userIDSelector]);
 }
 
 export default useAuth;

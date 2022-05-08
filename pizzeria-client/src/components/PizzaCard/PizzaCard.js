@@ -1,3 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  orderCartQuantityReload,
+  selectOrderCartID,
+} from "../../services/authSlice";
 import {
   Box,
   Image,
@@ -20,8 +25,13 @@ import { AddIcon } from "@chakra-ui/icons";
 import RadioSizeButton from "./RadioSizeButton";
 import AmountInput from "./AmountInput";
 import { useEffect, useState } from "react";
+import { addToCart } from "../../api/orderAPI";
 
 function PizzaCard(props) {
+  const dispatch = useDispatch();
+
+  const orderCartID = useSelector(selectOrderCartID);
+
   const [price, setPrice] = useState(props.price_26);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("26 см");
@@ -100,7 +110,26 @@ function PizzaCard(props) {
         </Heading>
       </Center>
       <Center my={2}>
-        <Button leftIcon={<AddIcon />} colorScheme="teal" variant="solid">
+        <Button
+          leftIcon={<AddIcon />}
+          colorScheme="teal"
+          variant="solid"
+          onClick={() => {
+            addToCart(
+              orderCartID.payload,
+              props.id,
+              size.substring(0, 2),
+              quantity
+            )
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                dispatch(orderCartQuantityReload());
+                console.log(data);
+              });
+          }}
+        >
           В корзину
         </Button>
       </Center>
