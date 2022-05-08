@@ -135,7 +135,7 @@ function PersonalInfoForm() {
       <form onSubmit={handleSubmit}>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Имя" width="10vw" />
+            <InputLeftAddon children="Имя" maxW={20} />
             <Input
               type="text"
               placeholder="Ваше имя"
@@ -156,7 +156,7 @@ function PersonalInfoForm() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Фамилия" width="10vw" />
+            <InputLeftAddon children="Фамилия" maxW={24} />
             <Input
               type="text"
               placeholder="Ваша фамилия"
@@ -177,7 +177,7 @@ function PersonalInfoForm() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Отчество" width="10vw" />
+            <InputLeftAddon children="Отчество" maxW={24} />
             <Input
               type="text"
               placeholder="Ваше отчество"
@@ -198,7 +198,7 @@ function PersonalInfoForm() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Телефон" width="10vw" />
+            <InputLeftAddon children="Телефон" maxW={24} />
             <Input
               type="tel"
               placeholder="Ваш телефон"
@@ -221,7 +221,7 @@ function PersonalInfoForm() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Email" width="10vw" />
+            <InputLeftAddon children="Email" maxW={20} />
             <Input
               type="email"
               placeholder="Ваш email"

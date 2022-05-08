@@ -114,7 +114,7 @@ function Profile() {
       <form onSubmit={handleSubmit}>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Старый пароль" width="15vw" />
+            <InputLeftAddon children="Старый пароль" maxW={36} />
             <Input
               type="password"
               placeholder="Ваш старый пароль"
@@ -135,7 +135,7 @@ function Profile() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Новый пароль" width="15vw" />
+            <InputLeftAddon children="Новый пароль" maxW={36} />
             <Input
               type="password"
               placeholder="Ваш новый пароль"
@@ -156,7 +156,7 @@ function Profile() {
         </FormControl>
         <FormControl mb={2}>
           <InputGroup>
-            <InputLeftAddon children="Подтвердите новый пароль" width="25vw" />
+            <InputLeftAddon children="Подтвердите" maxW={36} />
             <Input
               type="password"
               placeholder="Подтвердите ваш новый пароль"

@@ -19,20 +19,22 @@ function Profile() {
   return (
     <>
       <Navbar />
-      <SimpleGrid columns={2} spacing={10}>
-        <Box>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={10}>
+        <Box mx={5}>
           <Center>
             <Heading>Личные данные</Heading>
           </Center>
-          <VStack m={2} spacing={2}>
+          <Box my={2}>
             <PersonalInfoForm />
-            <Divider />
+            <Divider my={4} />
             <PasswordForm />
-          </VStack>
-          <HStack spacing={2}>
+          </Box>
+          <Box mb={2}>
             <AddressModal />
+          </Box>
+          <Box>
             <CardDetailsModal />
-          </HStack>
+          </Box>
         </Box>
         <Box>
           <Center>
