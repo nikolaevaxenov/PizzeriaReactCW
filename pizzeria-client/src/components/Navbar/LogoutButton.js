@@ -17,7 +17,6 @@ function LogoutButton() {
       leftIcon={<FiLogOut />}
       onClick={() => {
         logoutUser().then((res) => {
-          console.log(res);
           dispatch(logout());
           toast({
             title: "Выход",

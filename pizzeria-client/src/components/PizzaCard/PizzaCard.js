@@ -126,7 +126,6 @@ function PizzaCard(props) {
               })
               .then((data) => {
                 dispatch(orderCartQuantityReload());
-                console.log(data);
               });
           }}
         >

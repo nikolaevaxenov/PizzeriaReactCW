@@ -18,7 +18,6 @@ function CartButton() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log(orderCartQuantityReload);
     getCartOrderQuantity(orderCartID.payload)
       .then((res) => {
         return res.json();

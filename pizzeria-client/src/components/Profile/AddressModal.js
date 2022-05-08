@@ -67,7 +67,6 @@ function AddressModal() {
       .then((result) => {
         setAddresses(result);
       });
-    console.log(addresses);
   }, [userID.payload, watchAddress]);
 
   return (

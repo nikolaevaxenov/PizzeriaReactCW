@@ -67,8 +67,6 @@ function PersonalInfoForm() {
     };
 
     if (!firstName) {
-      console.log(`val name = ${firstName}`);
-      console.log(`val name r = ${userFirstName.payload}`);
       errors.firstName = ["Обязательное поле"];
     } else if (!nameValidation(firstName)) {
       errors.firstName = [
@@ -93,8 +91,6 @@ function PersonalInfoForm() {
     }
 
     if (!email) {
-      console.log(`val email = ${email}`);
-      console.log(`val email r = ${userEmail.payload}`);
       errors.email = ["Обязательное поле"];
     } else if (!emailValidation(email)) {
       errors.email = ["Некорректная электронная почта!"];
@@ -123,8 +119,6 @@ function PersonalInfoForm() {
           isClosable: true,
         });
         setFormState(true);
-
-        console.log(errors);
 
         setEditingPersonalInfo(true);
       }

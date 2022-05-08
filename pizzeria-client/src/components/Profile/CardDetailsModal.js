@@ -59,7 +59,6 @@ function AddressModal() {
       .then((result) => {
         setCards(result);
       });
-    console.log(cards);
   }, [userID.payload, watchCard]);
 
   return (

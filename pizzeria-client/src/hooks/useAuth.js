@@ -62,7 +62,6 @@ function useAuth(privateRoute = false, watchingState = null) {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           dispatch(orderCartID(data.id));
         });
     }

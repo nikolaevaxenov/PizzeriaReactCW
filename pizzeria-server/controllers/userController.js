@@ -79,7 +79,6 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  console.log(req.body);
   const result = await userModel.update(
     {
       email: req.body.email,
@@ -105,8 +104,6 @@ const updateUser = async (req, res) => {
 };
 
 const updatePasswordUser = async (req, res) => {
-  console.log(req.body);
-
   const user = await userModel
     .findOne({
       where: {

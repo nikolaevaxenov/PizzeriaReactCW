@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const handleRefreshToken = (req, res) => {
   const cookies = req.cookies;
-  console.log(req.cookies);
 
   if (!cookies?.refreshToken) return res.sendStatus(401);
   const refreshToken = cookies.refreshToken;
@@ -16,7 +15,6 @@ const handleRefreshToken = (req, res) => {
       },
     })
     .then((result) => {
-      console.log(result);
       if (!result) return res.sendStatus(403);
       verify(
         refreshToken,

@@ -70,7 +70,6 @@ function RegistrationModal(props) {
 
     if (emailError && nameError && pass1Error && pass2Error && !auth) {
       registerUser(email, pass2, name).then((res) => {
-        console.log(res.status);
         if (res.status === 208) {
           setAuthError(false);
           return;

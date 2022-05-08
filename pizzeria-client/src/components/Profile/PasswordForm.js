@@ -89,7 +89,6 @@ function Profile() {
         oldPassword,
         new1Password
       );
-      console.log(result);
       if (result.status === 201) {
         toast({
           title: "Успех",
