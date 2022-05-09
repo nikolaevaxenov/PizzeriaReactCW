@@ -76,7 +76,6 @@ function Cart() {
         return result.json();
       })
       .then((result) => {
-        console.log(result);
         setPizzas(result);
       });
   }, [orderCartID.payload, orderCartQuantityReload]);
@@ -99,10 +98,6 @@ function Cart() {
       phoneNumber: [],
       email: [],
     };
-
-    console.log(
-      `firstName = ${firstName} | phoneNumber = ${phoneNumber} | email = ${email}`
-    );
 
     if (!firstName) {
       errors.firstName = ["Обязательное поле"];
@@ -129,7 +124,6 @@ function Cart() {
 
   const handleSubmit = async () => {
     const errors = await validateForm;
-    console.log(errors);
 
     if (
       errors.firstName.length === 0 &&
@@ -137,7 +131,6 @@ function Cart() {
       errors.email.length === 0
     ) {
       if (address !== 0 && card !== 0) {
-        console.log(`Success! Address = ${address} | Card = ${card}`);
         await updateUserOnOrder(userID, firstName, phoneNumber, email);
         createOrder(userID.payload, address, card, comment).then(() => {
           toast({

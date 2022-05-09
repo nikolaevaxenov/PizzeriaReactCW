@@ -26,8 +26,8 @@ import {
 } from "../../services/authSlice";
 import AddressModal from "../Profile/AddressModal";
 import CardDetailsModal from "../Profile/CardDetailsModal";
-import { getAddress, createAddress } from "../../api/addressAPI";
-import { getCard, createCard } from "../../api/cardAPI";
+import { getAddress } from "../../api/addressAPI";
+import { getCard } from "../../api/cardAPI";
 
 function PersonalInfoMenu(props) {
   const toast = useToast();
@@ -50,7 +50,6 @@ function PersonalInfoMenu(props) {
   }, [userFirstName.payload, userPhoneNumber.payload, userEmail.payload]);
 
   useEffect(() => {
-    console.log(userID.payload);
     getAddress(userID.payload)
       .then((res) => {
         if (res.status !== 400) {
@@ -65,7 +64,6 @@ function PersonalInfoMenu(props) {
         return {};
       })
       .then((result) => {
-        console.log(result);
         setAddresses(result);
       });
   }, [userID.payload, addressReload]);

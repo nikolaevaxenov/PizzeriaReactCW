@@ -35,7 +35,6 @@ function Profile() {
   const [orderHistoryElem, setOrderHistoryElem] = useState([]);
 
   useEffect(() => {
-    console.log(`User ID = ${userID.payload}`);
     getOrderHistory(userID.payload)
       .then((res) => {
         return res.json();

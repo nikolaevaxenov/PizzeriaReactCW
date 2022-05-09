@@ -1,15 +1,17 @@
 const { Sequelize, DataTypes } = require("sequelize");
 require("dotenv").config();
 
-const sequelize = new Sequelize(
-  process.env.DATABASE_NAME,
-  process.env.DATABASE_USERNAME,
-  process.env.DATABASE_PASSWORD,
-  {
-    host: process.env.DATABASE_HOST,
-    dialect: "postgres",
-  }
-);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: process.env.DB_ENABLE_SSL
+      ? {
+          require: process.env.DB_ENABLE_SSL ? true : false,
+          rejectUnauthorized: false,
+        }
+      : false,
+  },
+});
 const User = require("./userModel");
 
 const Address = sequelize.define("Address", {

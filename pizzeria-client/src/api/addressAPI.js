@@ -1,6 +1,6 @@
 export const getAddress = async (id) => {
   if (id !== undefined) {
-    return await fetch(`http://localhost:3001/address/${id}`, {
+    return await fetch(`${process.env.REACT_APP_SERVER_URL}address/${id}`, {
       method: "GET",
       credentials: "include",
     });
@@ -16,7 +16,7 @@ export const createAddress = async (
   apartment_number,
   intercom_code
 ) => {
-  return await fetch(`http://localhost:3001/address/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}address/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const updateAddress = async (
   apartment_number,
   intercom_code
 ) => {
-  return await fetch(`http://localhost:3001/address/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}address/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const updateAddress = async (
 };
 
 export const deleteAddress = async (id) => {
-  return await fetch(`http://localhost:3001/address/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}address/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

@@ -1,24 +1,9 @@
 import { useState, useEffect } from "react";
 import {
-  SimpleGrid,
-  Box,
   Button,
-  Heading,
-  Center,
-  VStack,
   HStack,
-  Divider,
-  Alert,
-  AlertIcon,
-  FormControl,
   Input,
-  InputGroup,
-  InputLeftAddon,
-  FormLabel,
-  Select,
   Image,
-  Grid,
-  GridItem,
   Tr,
   Td,
   useToast,
@@ -28,16 +13,9 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   orderCartQuantityReload,
-  selectUserID,
-  selectUserFirstName,
-  selectUserPhoneNumber,
-  selectUserEmail,
   selectOrderCartID,
 } from "../../services/authSlice";
-import { getAddress, createAddress } from "../../api/addressAPI";
-import { getCard, createCard } from "../../api/cardAPI";
-import { getCartPizzas, removeFromCart, addToCart } from "../../api/orderAPI";
-import AmountInput from "../PizzaCard/AmountInput";
+import { removeFromCart, addToCart } from "../../api/orderAPI";
 
 function PizzaRow(props) {
   const pizza = props.pizza;
@@ -99,7 +77,6 @@ function PizzaRow(props) {
               isLoading={submittingQuantity}
               onClick={() => {
                 setSubmittingQuantity(true);
-                console.log(orderCartID.payload);
                 removeFromCart(
                   orderCartID.payload,
                   pizza.PizzaId,

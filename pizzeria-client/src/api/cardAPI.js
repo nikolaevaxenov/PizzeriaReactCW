@@ -1,6 +1,6 @@
 export const getCard = async (id) => {
   if (id !== undefined) {
-    return await fetch(`http://localhost:3001/card/${id}`, {
+    return await fetch(`${process.env.REACT_APP_SERVER_URL}card/${id}`, {
       method: "GET",
       credentials: "include",
     });
@@ -8,7 +8,7 @@ export const getCard = async (id) => {
 };
 
 export const createCard = async (id, card_number, expiry_date, cvc_code) => {
-  return await fetch(`http://localhost:3001/card/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}card/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const createCard = async (id, card_number, expiry_date, cvc_code) => {
 };
 
 export const updateCard = async (id, card_number, expiry_date, cvc_code) => {
-  return await fetch(`http://localhost:3001/card/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}card/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const updateCard = async (id, card_number, expiry_date, cvc_code) => {
 };
 
 export const deleteCard = async (id) => {
-  return await fetch(`http://localhost:3001/card/${id}`, {
+  return await fetch(`${process.env.REACT_APP_SERVER_URL}card/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

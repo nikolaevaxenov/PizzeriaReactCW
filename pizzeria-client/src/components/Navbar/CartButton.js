@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import { AiOutlineShoppingCart } from "react-icons/ai";

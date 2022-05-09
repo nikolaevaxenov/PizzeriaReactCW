@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectAuth } from "../../services/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Flex,
   Spacer,
@@ -10,21 +10,18 @@ import {
   ButtonGroup,
   Button,
   IconButton,
-  Icon,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { FaUserAlt } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiLogIn } from "react-icons/fi";
 import LoginModal from "../AuthModal/LoginModal";
 import RegistrationModal from "../AuthModal/RegistrationModal";
 import LogoutButton from "./LogoutButton";
+import ProfileButton from "./ProfileButton";
 import CartButton from "./CartButton";
 
 function NavbarMobile() {
   const auth = useSelector(selectAuth);
-  let navigate = useNavigate();
 
   const [navBarMobVisibility, setNavBarMobVisibility] = useState("none");
   const {
@@ -114,7 +111,7 @@ function NavbarMobile() {
           </Heading>
         </Box>
         <ButtonGroup gap="2">
-          <CartButton />
+          {auth && <CartButton />}
           {!auth ? (
             <Button
               bgGradient="linear(to right, #f12711, #f5af19)"
@@ -128,14 +125,7 @@ function NavbarMobile() {
             </Button>
           ) : (
             <React.Fragment>
-              <IconButton
-                bgGradient="linear(to right, #f12711, #f5af19)"
-                _hover={{
-                  bgGradient: "linear(to right, #659999, #f4791f)",
-                }}
-                icon={<FaUserAlt />}
-                onClick={() => navigate("/profile")}
-              />
+              <ProfileButton />
               <LogoutButton />
             </React.Fragment>
           )}

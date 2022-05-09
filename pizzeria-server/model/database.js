@@ -10,12 +10,12 @@ const userModel = require("./userModel.js");
 const refreshTokensModel = require("./refreshTokensModel.js");
 
 const reCreateTables = async () => {
+  await userModel.sync({ force: true });
+  await pizzaModel.sync({ force: true });
   await addressModel.sync({ force: true });
   await cardDetailModel.sync({ force: true });
   await orderModel.sync({ force: true });
   await orderPizzaModel.sync({ force: true });
-  await pizzaModel.sync({ force: true });
-  await userModel.sync({ force: true });
   await refreshTokensModel.sync({ force: true });
   console.log("All models were synchronized successfully.");
 };
